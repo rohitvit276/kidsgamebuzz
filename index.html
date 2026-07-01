@@ -6,8 +6,8 @@
 
 <!-- ═══════════ PRIMARY SEO ═══════════ -->
 <title>Kids Game Buzz – Free Online Games for Kids | Fun Learning Games Ages 2–7</title>
-<meta name="description" content="Kids Game Buzz is the buzzing place for free, safe kids games online! Play Color Match, Memory Cards, Balloon Pop, Math Quiz, Word Spelling and more — no download, no sign up needed!">
-<meta name="keywords" content="kids games, free games for kids, toddler games, learning games, children games online, educational games, preschool games, memory game for kids, math games for kids, spelling games for kids, color games, balloon pop game">
+<meta name="description" content="Kids Game Buzz is the buzzing place for free, safe kids games online! Play Tic Tac Toe, Whack-a-Mole, Copy Cat, Color Match, Memory Cards, Balloon Pop, Math Quiz, Word Spelling and more — no download, no sign up needed!">
+<meta name="keywords" content="kids games, free games for kids, toddler games, learning games, children games online, educational games, preschool games, memory game for kids, math games for kids, spelling games for kids, color games, balloon pop game, tic tac toe for kids, whack a mole game, simon says memory game">
 <meta name="author" content="Kids Game Buzz">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.kidsgamebuzz.com/">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.kidsgamebuzz.com/">
 <meta property="og:title" content="Kids Game Buzz – Free Online Games for Kids">
-<meta property="og:description" content="Safe, free, and buzzing with fun! Play Color Match, Memory Cards, Math Quiz, Word Spelling and more at Kids Game Buzz. No sign up needed. Perfect for ages 2–7.">
+<meta property="og:description" content="Safe, free, and buzzing with fun! Play Tic Tac Toe, Whack-a-Mole, Color Match, Memory Cards, Math Quiz and more at Kids Game Buzz. No sign up needed. Perfect for ages 2–7.">
 <meta property="og:image" content="https://www.kidsgamebuzz.com/og-image.png">
 <meta property="og:site_name" content="Kids Game Buzz">
 <meta property="og:locale" content="en_US">
@@ -80,7 +80,13 @@
   --coral: #FF7043; --purple: #CE93D8; --navy: #1A237E;
   --card-bg: #ffffff; --radius: 24px;
 }
-body { font-family:'Nunito',sans-serif; background:linear-gradient(160deg,#E3F2FD 0%,#F3E5F5 50%,#E8F5E9 100%); min-height:100vh; color:var(--navy); }
+body {
+  font-family:'Nunito',sans-serif; min-height:100vh; color:var(--navy);
+  background-image:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><polygon points='42,16 48,34 66,34 52,45 57,63 42,52 27,63 32,45 18,34 36,34' fill='%23FFD54F' fill-opacity='0.45'/><g fill='%234FC3F7' fill-opacity='0.32'><ellipse cx='200' cy='58' rx='28' ry='14'/><ellipse cx='182' cy='50' rx='16' ry='11'/><ellipse cx='218' cy='50' rx='14' ry='10'/></g><ellipse cx='72' cy='168' rx='15' ry='19' fill='%23FF7043' fill-opacity='0.35'/><path d='M72 187 q7 12 -3 26' stroke='%23FF7043' stroke-opacity='0.35' stroke-width='2.5' fill='none'/><circle cx='236' cy='168' r='7' fill='%23CE93D8' fill-opacity='0.45'/><circle cx='148' cy='250' r='5' fill='%2366BB6A' fill-opacity='0.45'/><polygon points='246,226 250,238 263,238 253,245 257,257 246,250 235,257 239,245 229,238 242,238' fill='%234FC3F7' fill-opacity='0.4'/><path d='M118 108 q9 -16 18 0 q9 16 18 0' stroke='%2366BB6A' stroke-opacity='0.4' stroke-width='3' fill='none'/><circle cx='30' cy='250' r='6' fill='%23FFD54F' fill-opacity='0.45'/></svg>"),
+    linear-gradient(160deg,#E3F2FD 0%,#F3E5F5 50%,#E8F5E9 100%);
+  background-attachment:fixed;
+}
 
 /* HEADER */
 header { background:var(--navy); padding:0 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; box-shadow:0 4px 20px rgba(26,35,126,.3); }
@@ -240,6 +246,38 @@ header { background:var(--navy); padding:0 24px; display:flex; align-items:cente
 .word-action { margin-top:12px; }
 
 
+/* TIMER BAR (shared) */
+.timer-bar { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+.timer-opt { font-family:'Fredoka One',cursive; font-size:.85rem; border:2px solid var(--sky); background:#fff; color:var(--navy); border-radius:99px; padding:4px 14px; cursor:pointer; transition:background .15s; }
+.timer-opt:hover { background:#E1F5FE; }
+.timer-opt.active { background:var(--sky); color:#fff; }
+.timer-display { font-family:'Fredoka One',cursive; font-size:1.05rem; color:var(--navy); background:var(--yellow); border-radius:99px; padding:4px 14px; }
+.timer-display.low { background:var(--coral); color:#fff; animation:pulseTimer .5s infinite alternate; }
+@keyframes pulseTimer { from{transform:scale(1)} to{transform:scale(1.12)} }
+.timeup { text-align:center; padding:24px 0; }
+
+/* TIC TAC TOE */
+#game-ttt { text-align:center; }
+.ttt-grid { display:grid; grid-template-columns:repeat(3,90px); gap:10px; justify-content:center; margin:14px 0; }
+.ttt-cell { width:90px; height:90px; font-size:2.4rem; border:none; border-radius:16px; background:#f0f4ff; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,.1); transition:transform .12s,background .15s; }
+.ttt-cell:hover:not(:disabled) { background:#E1F5FE; transform:scale(1.05); }
+.ttt-cell:disabled { cursor:default; }
+.ttt-cell.win { background:#C8E6C9; animation:bounce .5s; }
+
+/* WHACK-A-MOLE */
+#game-mole { text-align:center; }
+.mole-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:360px; margin:0 auto 14px; }
+.mole-hole { aspect-ratio:1; background:radial-gradient(circle at 50% 72%,#8D6E63 0%,#6D4C41 70%); border-radius:18px; display:flex; align-items:flex-end; justify-content:center; overflow:hidden; cursor:pointer; box-shadow:inset 0 -6px 12px rgba(0,0,0,.25); user-select:none; }
+.mole { font-size:2.6rem; transform:translateY(110%); transition:transform .15s; pointer-events:none; }
+.mole-hole.up .mole { transform:translateY(6%); }
+
+/* COPY CAT */
+#game-simon { text-align:center; }
+.simon-grid { display:grid; grid-template-columns:repeat(2,110px); gap:14px; justify-content:center; margin:14px 0; }
+.simon-pad { width:110px; height:110px; border:none; border-radius:22px; cursor:pointer; opacity:.45; transition:opacity .12s,transform .12s; box-shadow:0 5px 12px rgba(0,0,0,.15); }
+.simon-pad.lit { opacity:1; transform:scale(1.08); }
+.simon-pad:disabled { cursor:default; }
+
 /* FOOTER */
 footer { text-align:center; padding:24px 20px; color:#888; font-size:.85rem; border-top:1px solid #ddd; background:rgba(255,255,255,.6); margin-top:20px; }
 footer a { color:var(--sky); text-decoration:none; }
@@ -355,6 +393,36 @@ footer a { color:var(--sky); text-decoration:none; }
       </div>
     </div>
 
+    <div class="game-card" onclick="openGame('ttt')">
+      <div class="card-header orange"><span class="card-icon">⭕</span></div>
+      <div class="card-body">
+        <h3>Tic Tac Toe</h3>
+        <p>Play ❌ and ⭕ against Buzzy the Bee — or a friend!</p>
+        <span class="age-tag">Ages 4–7</span>
+        <button class="play-btn">▶ Play Now</button>
+      </div>
+    </div>
+
+    <div class="game-card" onclick="openGame('mole')">
+      <div class="card-header green"><span class="card-icon">🐹</span></div>
+      <div class="card-body">
+        <h3>Whack-a-Mole</h3>
+        <p>Tap the moles before they hide — 30 seconds on the clock!</p>
+        <span class="age-tag">Ages 3–7</span>
+        <button class="play-btn">▶ Play Now</button>
+      </div>
+    </div>
+
+    <div class="game-card" onclick="openGame('simon')">
+      <div class="card-header purple"><span class="card-icon">🐵</span></div>
+      <div class="card-body">
+        <h3>Copy Cat</h3>
+        <p>Watch the colors light up, then repeat the pattern!</p>
+        <span class="age-tag">Ages 4–7</span>
+        <button class="play-btn">▶ Play Now</button>
+      </div>
+    </div>
+
   </div>
 
   <div class="section-title">🌟 More coming soon…</div>
@@ -455,6 +523,45 @@ function playPop() {
 }
 
 /* ══════════════════════════════════════
+   SHARED GAME TIMERS
+   ══════════════════════════════════════ */
+let _gameTimers = [];
+function clearGameTimers() { _gameTimers.forEach(id => clearInterval(id)); _gameTimers = []; }
+function fmtTime(s) { return s >= 60 ? Math.floor(s/60) + ':' + String(s%60).padStart(2,'0') : s + 's'; }
+
+/* Timer challenge bar for quiz games: Off / 30s / 60s */
+function timerBarHTML(mode, left) {
+  return `<div class="timer-bar"><span style="font-weight:800">⏱️ Timer:</span>` +
+    [0,30,60].map(t => `<button class="timer-opt${t===mode?' active':''}" data-t="${t}">${t===0?'Off':t+'s'}</button>`).join('') +
+    (mode>0 ? `<span class="timer-display${left<=5?' low':''}" id="timer-display">⏳ ${left}s</span>` : '') +
+  `</div>`;
+}
+function wireTimerBar(el, rerender) {
+  el.querySelectorAll('.timer-opt').forEach(b => b.addEventListener('click', () => rerender(+b.dataset.t)));
+}
+function startCountdown(el, seconds, onEnd) {
+  const state = { left: seconds };
+  state.id = setInterval(() => {
+    state.left--;
+    const d = el.querySelector('#timer-display');
+    if (d) { d.textContent = '⏳ ' + state.left + 's'; if (state.left <= 5) d.classList.add('low'); }
+    if (state.left <= 0) { clearInterval(state.id); onEnd(); }
+  }, 1000);
+  _gameTimers.push(state.id);
+  return state;
+}
+function showTimeUp(el, score, total, retry) {
+  playWin();
+  el.innerHTML = `<div class="timeup">
+    <div style="font-size:3.2rem">⏰</div>
+    <div class="game-feedback feedback-good">Time's up!</div>
+    <div class="score-display">You scored ${score}${total ? ` out of ${total}` : ''}! 🌟</div>
+    <button class="restart-btn" id="timeup-retry">🔄 Play Again</button>
+  </div>`;
+  el.querySelector('#timeup-retry').addEventListener('click', retry);
+}
+
+/* ══════════════════════════════════════
    MODAL
    ══════════════════════════════════════ */
 function openGame(id) {
@@ -472,6 +579,9 @@ function openGame(id) {
     math:     { title:'➕ Math Quiz',           render: renderMath },
     word:     { title:'🔤 Word Spelling',      render: renderWord },
     drawing:  { title:'✏️ Free Drawing',       render: renderDrawing },
+    ttt:      { title:'⭕ Tic Tac Toe',        render: renderTTT },
+    mole:     { title:'🐹 Whack-a-Mole',       render: renderMole },
+    simon:    { title:'🐵 Copy Cat',           render: renderSimon },
   };
   const g = games[id];
   document.getElementById('modal-title').textContent = g.title;
@@ -481,7 +591,7 @@ function openGame(id) {
 }
 function closeGame() {
   document.getElementById('modal').classList.remove('open');
-  if (window._balloonInterval) { clearInterval(window._balloonInterval); window._balloonInterval = null; }
+  clearGameTimers();
 }
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('modal')) closeGame();
@@ -495,12 +605,18 @@ const COLORS = [
   {name:'Yellow',hex:'#FFEB3B',label:'yellow'},{name:'Green',hex:'#4CAF50',label:'green'},
   {name:'Purple',hex:'#9C27B0',label:'purple'},{name:'Orange',hex:'#FF9800',label:'orange'},
 ];
-function renderColor(el) {
-  let score=0, total=0;
+function renderColor(el, timeLimit=0) {
+  clearGameTimers();
+  let score=0, total=0, ended=false;
+  const countdown = timeLimit>0
+    ? startCountdown(el, timeLimit, ()=>{ ended=true; showTimeUp(el, score, total, ()=>renderColor(el, timeLimit)); })
+    : null;
   function next() {
+    if (ended) return;
     const target=COLORS[Math.floor(Math.random()*COLORS.length)];
     const shuffled=[...COLORS].sort(()=>Math.random()-.5);
     el.innerHTML=`<div id="game-color">
+      ${timerBarHTML(timeLimit, countdown?countdown.left:0)}
       <div class="game-score">Score: <b>${score}</b> / ${total}</div>
       <div class="prompt-box">
         <div class="color-name" style="color:${target.hex}">${target.name}</div>
@@ -511,6 +627,7 @@ function renderColor(el) {
       </div>
       <div class="game-feedback" id="cfb"></div>
     </div>`;
+    wireTimerBar(el, t=>renderColor(el, t));
     el.querySelectorAll('.color-swatch').forEach(sw=>{
       sw.addEventListener('click',()=>{
         total++;
@@ -529,10 +646,17 @@ function renderColor(el) {
    ══════════════════════════════════════ */
 const MEM_EMOJIS=['🐶','🐱','🐸','🦊','🐼','🐻','🦁','🐯'];
 function renderMemory(el) {
+  clearGameTimers();
   const pairs=[...MEM_EMOJIS,...MEM_EMOJIS].sort(()=>Math.random()-.5);
-  let flipped=[],matched=0,locked=false;
+  let flipped=[],matched=0,locked=false,seconds=0;
+  const stopwatch=setInterval(()=>{
+    seconds++;
+    const d=el.querySelector('#mem-timer');
+    if(d)d.textContent=fmtTime(seconds);
+  },1000);
+  _gameTimers.push(stopwatch);
   el.innerHTML=`<div id="game-memory">
-    <div class="game-score">Matched: <b id="mscore">0</b> / 8</div>
+    <div class="game-score">Matched: <b id="mscore">0</b> / 8 &nbsp;·&nbsp; ⏱️ <b id="mem-timer">0s</b></div>
     <div class="mem-grid">
       ${pairs.map((e,i)=>`<div class="mem-card" data-idx="${i}" data-emoji="${e}"><span class="mem-back">❓</span><span class="mem-face">${e}</span></div>`).join('')}
     </div>
@@ -549,7 +673,7 @@ function renderMemory(el) {
           a.classList.add('matched'); b.classList.add('matched'); matched++;
           el.querySelector('#mscore').textContent=matched;
           const fb=el.querySelector('#mfb');
-          if(matched===8){fb.textContent='🏆 You won! Amazing!';fb.className='game-feedback feedback-good';playWin();}
+          if(matched===8){clearInterval(stopwatch);fb.textContent=`🏆 You won in ${fmtTime(seconds)}! Amazing!`;fb.className='game-feedback feedback-good';playWin();}
           else{fb.textContent='✅ Match!';fb.className='game-feedback feedback-good';playCorrect();}
           flipped=[]; locked=false;
         } else {
@@ -566,23 +690,22 @@ function renderMemory(el) {
    ══════════════════════════════════════ */
 const BALLOON_EMOJIS=['🎈','🎀','🎁','🎊','🎉','⭐','🌟','✨'];
 function renderBalloon(el) {
+  clearGameTimers();
   el.innerHTML=`<div id="game-balloon">
-    <div id="balloon-score-bar"><div class="score-display">Score: <span id="bscore">0</span> 🎈</div></div>
+    <div id="balloon-score-bar"><div class="score-display">Score: <span id="bscore">0</span> 🎈 &nbsp;·&nbsp; ⏳ <span id="btime">30</span>s</div></div>
     <div id="balloon-area"></div>
-    <button id="balloon-start">🎈 Start!</button>
+    <button id="balloon-start">🎈 Start! (30 seconds)</button>
     <div class="game-feedback" id="bfb"></div>
   </div>`;
   let score=0,running=false;
   el.querySelector('#balloon-start').addEventListener('click',()=>{
     if(running) return;
-    running=true; score=0; el.querySelector('#bscore').textContent=0;
+    running=true; score=0; let timeLeft=30;
+    el.querySelector('#bscore').textContent=0;
+    el.querySelector('#btime').textContent=timeLeft;
     el.querySelector('#balloon-start').disabled=true; el.querySelector('#bfb').textContent='';
     const area=el.querySelector('#balloon-area'); area.innerHTML='';
-    let count=0,max=20;
-    window._balloonInterval=setInterval(()=>{
-      if(count>=max){clearInterval(window._balloonInterval);running=false;el.querySelector('#balloon-start').disabled=false;
-        el.querySelector('#bfb').textContent=`🏆 Done! You got ${score} points!`;el.querySelector('#bfb').className='game-feedback feedback-good';playWin();return;}
-      count++;
+    const spawn=setInterval(()=>{
       const b=document.createElement('div'); b.className='balloon';
       b.textContent=BALLOON_EMOJIS[Math.floor(Math.random()*BALLOON_EMOJIS.length)];
       b.style.left=(5+Math.random()*80)+'%';
@@ -590,6 +713,17 @@ function renderBalloon(el) {
       b.addEventListener('click',()=>{score++;el.querySelector('#bscore').textContent=score;b.textContent='💥';playPop();setTimeout(()=>b.remove(),200);});
       area.appendChild(b); b.addEventListener('animationend',()=>b.remove());
     },600);
+    const tick=setInterval(()=>{
+      timeLeft--;
+      const d=el.querySelector('#btime'); if(d)d.textContent=timeLeft;
+      if(timeLeft<=0){
+        clearInterval(spawn); clearInterval(tick); running=false;
+        el.querySelector('#balloon-start').disabled=false;
+        el.querySelector('#bfb').textContent=`🏆 Time's up! You popped ${score} balloons!`;
+        el.querySelector('#bfb').className='game-feedback feedback-good'; playWin();
+      }
+    },1000);
+    _gameTimers.push(spawn,tick);
   });
 }
 
@@ -638,13 +772,19 @@ function renderShapes(el) {
    5. COUNTING BUBBLES
    ══════════════════════════════════════ */
 const BUBBLE_COLORS=['#FF8A80','#80D8FF','#CCFF90','#FFD180','#EA80FC','#A7FFEB'];
-function renderCounting(el){
-  let score=0,total=0;
+function renderCounting(el, timeLimit=0){
+  clearGameTimers();
+  let score=0,total=0,ended=false;
+  const countdown = timeLimit>0
+    ? startCountdown(el, timeLimit, ()=>{ ended=true; showTimeUp(el, score, total, ()=>renderCounting(el, timeLimit)); })
+    : null;
   function next(){
+    if (ended) return;
     const count=1+Math.floor(Math.random()*9);
     const w1=count===1?2:count-1, w2=count===9?8:count+1;
     const choices=[count,w1,w2].sort(()=>Math.random()-.5);
     el.innerHTML=`<div id="game-counting">
+      ${timerBarHTML(timeLimit, countdown?countdown.left:0)}
       <div class="game-score">Score: <b>${score}</b> / ${total}</div>
       <div class="count-question">How many bubbles? 🫧</div>
       <div class="bubble-area">
@@ -655,6 +795,7 @@ function renderCounting(el){
       </div>
       <div class="game-feedback" id="cfb2"></div>
     </div>`;
+    wireTimerBar(el, t=>renderCounting(el, t));
     el.querySelectorAll('.count-btn').forEach(btn=>{
       btn.addEventListener('click',()=>{
         total++;
@@ -671,9 +812,14 @@ function renderCounting(el){
 /* ══════════════════════════════════════
    6. MATH QUIZ
    ══════════════════════════════════════ */
-function renderMath(el){
-  let score=0,total=0;
+function renderMath(el, timeLimit=0){
+  clearGameTimers();
+  let score=0,total=0,ended=false;
+  const countdown = timeLimit>0
+    ? startCountdown(el, timeLimit, ()=>{ ended=true; showTimeUp(el, score, total, ()=>renderMath(el, timeLimit)); })
+    : null;
   function next(){
+    if (ended) return;
     const ops=['+','-'];
     const op=ops[Math.floor(Math.random()*ops.length)];
     let a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*10)+1;
@@ -683,6 +829,7 @@ function renderMath(el){
     while(wrongs.size<3){const w=answer+Math.floor(Math.random()*7)-3;if(w!==answer&&w>=0)wrongs.add(w);}
     const choices=[answer,...wrongs].slice(0,4).sort(()=>Math.random()-.5);
     el.innerHTML=`<div id="game-math">
+      ${timerBarHTML(timeLimit, countdown?countdown.left:0)}
       <div class="game-score">Score: <b>${score}</b> / ${total}</div>
       <div class="math-question">${a} ${op} ${b} = ?</div>
       <div class="math-choices">
@@ -690,6 +837,7 @@ function renderMath(el){
       </div>
       <div class="game-feedback" id="mthfb"></div>
     </div>`;
+    wireTimerBar(el, t=>renderMath(el, t));
     el.querySelectorAll('.math-btn').forEach(btn=>{
       btn.addEventListener('click',()=>{
         total++;
@@ -718,9 +866,14 @@ const WORDS=[
   {word:'BEE',emoji:'🐝',hint:'Makes honey and can sting'},
   {word:'MAP',emoji:'🗺️',hint:'Shows you where places are'},
 ];
-function renderWord(el){
-  let score=0,total=0;
+function renderWord(el, timeLimit=0){
+  clearGameTimers();
+  let score=0,total=0,ended=false;
+  const countdown = timeLimit>0
+    ? startCountdown(el, timeLimit, ()=>{ ended=true; showTimeUp(el, score, total, ()=>renderWord(el, timeLimit)); })
+    : null;
   function next(){
+    if (ended) return;
     const item=WORDS[Math.floor(Math.random()*WORDS.length)];
     const letters=item.word.split('');
     let typed=[];
@@ -732,6 +885,7 @@ function renderWord(el){
     const shuffled=[...pool].sort(()=>Math.random()-.5);
     function render(){
       el.innerHTML=`<div id="game-word">
+        ${timerBarHTML(timeLimit, countdown?countdown.left:0)}
         <div class="game-score">Score: <b>${score}</b> / ${total}</div>
         <div class="word-picture">${item.emoji}</div>
         <div class="word-hint">${item.hint}</div>
@@ -743,9 +897,11 @@ function renderWord(el){
         </div>
         <div class="game-feedback" id="wfb"></div>
         <div class="word-action">
-          <button class="restart-btn" onclick="renderWord(this.closest('.modal-body'))">🔄 New Word</button>
+          <button class="restart-btn" id="new-word-btn">🔄 New Word</button>
         </div>
       </div>`;
+      wireTimerBar(el, t=>renderWord(el, t));
+      el.querySelector('#new-word-btn').addEventListener('click',()=>next());
       el.querySelectorAll('.letter-btn').forEach(btn=>{
         btn.addEventListener('click',()=>{
           if(typed.length>=letters.length) return;
@@ -806,6 +962,245 @@ function renderDrawing(el){
   });
   el.querySelector('#brush-size').addEventListener('input',e=>size=+e.target.value);
   el.querySelector('#draw-clear').addEventListener('click',()=>{ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);});
+}
+
+/* ══════════════════════════════════════
+   9. TIC TAC TOE
+   ══════════════════════════════════════ */
+function renderTTT(el, vsCPU=true){
+  clearGameTimers();
+  const WINS=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  let board=Array(9).fill(''), turn='X', over=false;
+
+  function winner(){
+    for(const w of WINS){
+      const [a,b,c]=w;
+      if(board[a]&&board[a]===board[b]&&board[a]===board[c]) return {p:board[a],line:w};
+    }
+    return board.every(v=>v)?{p:'draw'}:null;
+  }
+  function statusText(res){
+    if(res) return res.p==='draw'?'Game over':'We have a winner!';
+    if(vsCPU) return turn==='X'?'Your turn — you are ❌':'🐝 Buzzy is thinking…';
+    return `${turn==='X'?'❌':'⭕'}'s turn`;
+  }
+  function feedbackText(res){
+    if(!res) return '';
+    if(res.p==='draw') return '🤝 It\'s a draw!';
+    if(res.p==='X') return vsCPU?'🎉 You win! Great job!':'🎉 ❌ wins!';
+    return vsCPU?'🐝 Buzzy wins this time!':'🎉 ⭕ wins!';
+  }
+  function draw(){
+    const res=winner();
+    el.innerHTML=`<div id="game-ttt">
+      <div class="timer-bar">
+        <button class="timer-opt${vsCPU?' active':''}" id="ttt-cpu">🐝 vs Buzzy</button>
+        <button class="timer-opt${!vsCPU?' active':''}" id="ttt-2p">👫 2 Players</button>
+      </div>
+      <div class="game-score">${statusText(res)}</div>
+      <div class="ttt-grid">
+        ${board.map((v,i)=>`<button class="ttt-cell${res&&res.line&&res.line.includes(i)?' win':''}" data-i="${i}" ${v||over?'disabled':''}>${v==='X'?'❌':v==='O'?'⭕':''}</button>`).join('')}
+      </div>
+      <div class="game-feedback ${res&&res.p!=='draw'?'feedback-good':''}">${feedbackText(res)}</div>
+      <button class="restart-btn" id="ttt-restart">🔄 New Game</button>
+    </div>`;
+    el.querySelector('#ttt-cpu').addEventListener('click',()=>renderTTT(el,true));
+    el.querySelector('#ttt-2p').addEventListener('click',()=>renderTTT(el,false));
+    el.querySelector('#ttt-restart').addEventListener('click',()=>renderTTT(el,vsCPU));
+    el.querySelectorAll('.ttt-cell').forEach(c=>c.addEventListener('click',()=>move(+c.dataset.i)));
+  }
+  function place(i){
+    board[i]=turn;
+    const res=winner();
+    if(res){
+      over=true;
+      if(res.p==='draw') playPop();
+      else if(vsCPU) res.p==='X'?playWin():playWrong();
+      else playWin();
+    } else {
+      turn=turn==='X'?'O':'X';
+    }
+    draw();
+  }
+  function move(i){
+    if(over||board[i]) return;
+    if(vsCPU&&turn==='O') return; // Buzzy's turn — wait
+    place(i);
+    if(!over&&vsCPU&&turn==='O'){
+      const t=setTimeout(cpuMove,500);
+      _gameTimers.push(t);
+    }
+  }
+  function cpuMove(){
+    if(over) return;
+    place(bestMove());
+  }
+  function bestMove(){
+    // win if possible, else block, else center, corner, random
+    const findTwo=p=>{
+      for(const [a,b,c] of WINS){
+        const vals=[board[a],board[b],board[c]];
+        if(vals.filter(v=>v===p).length===2&&vals.includes('')) return [a,b,c][vals.indexOf('')];
+      }
+      return -1;
+    };
+    let m=findTwo('O');
+    if(m<0) m=findTwo('X');
+    if(m<0&&!board[4]) m=4;
+    if(m<0){
+      const corners=[0,2,6,8].filter(i=>!board[i]);
+      if(corners.length) m=corners[Math.floor(Math.random()*corners.length)];
+    }
+    if(m<0){
+      const empty=board.map((v,i)=>v?-1:i).filter(i=>i>=0);
+      m=empty[Math.floor(Math.random()*empty.length)];
+    }
+    return m;
+  }
+  draw();
+}
+
+/* ══════════════════════════════════════
+   10. WHACK-A-MOLE
+   ══════════════════════════════════════ */
+function renderMole(el){
+  clearGameTimers();
+  el.innerHTML=`<div id="game-mole">
+    <div class="game-score">Score: <b id="mole-score">0</b> &nbsp;·&nbsp; ⏳ <span id="mole-timer">30</span>s</div>
+    <div class="mole-grid">
+      ${Array.from({length:9},(_,i)=>`<div class="mole-hole" data-i="${i}"><span class="mole">🐹</span></div>`).join('')}
+    </div>
+    <button class="restart-btn" id="mole-start" style="background:var(--green);color:#fff">🐹 Start! (30 seconds)</button>
+    <div class="game-feedback" id="molefb"></div>
+  </div>`;
+  let score=0,running=false;
+  const holes=[...el.querySelectorAll('.mole-hole')];
+  holes.forEach(h=>{
+    h.addEventListener('click',()=>{
+      if(!running||!h.classList.contains('up')) return;
+      score++;
+      el.querySelector('#mole-score').textContent=score;
+      const m=h.querySelector('.mole');
+      m.textContent='💥'; playPop();
+      h.classList.remove('up');
+      setTimeout(()=>m.textContent='🐹',300);
+    });
+  });
+  el.querySelector('#mole-start').addEventListener('click',()=>{
+    if(running) return;
+    running=true; score=0; let timeLeft=30;
+    el.querySelector('#mole-score').textContent=0;
+    el.querySelector('#mole-timer').textContent=timeLeft;
+    el.querySelector('#molefb').textContent='';
+    el.querySelector('#mole-start').disabled=true;
+    const pop=setInterval(()=>{
+      holes.forEach(h=>h.classList.remove('up'));
+      const h=holes[Math.floor(Math.random()*holes.length)];
+      h.querySelector('.mole').textContent='🐹';
+      h.classList.add('up');
+    },700);
+    const tick=setInterval(()=>{
+      timeLeft--;
+      el.querySelector('#mole-timer').textContent=timeLeft;
+      if(timeLeft<=0){
+        clearInterval(pop); clearInterval(tick); running=false;
+        holes.forEach(h=>h.classList.remove('up'));
+        el.querySelector('#mole-start').disabled=false;
+        el.querySelector('#molefb').textContent=`🏆 You whacked ${score} moles!`;
+        el.querySelector('#molefb').className='game-feedback feedback-good';
+        playWin();
+      }
+    },1000);
+    _gameTimers.push(pop,tick);
+  });
+}
+
+/* ══════════════════════════════════════
+   11. COPY CAT (watch & repeat the pattern)
+   ══════════════════════════════════════ */
+const SIMON_PADS=[
+  {color:'#EF5350',freq:330},
+  {color:'#66BB6A',freq:392},
+  {color:'#42A5F5',freq:262},
+  {color:'#FFCA28',freq:494},
+];
+function playTone(freq,dur){
+  if(!soundOn) return;
+  const ac=getAC();
+  const g=ac.createGain();
+  g.gain.setValueAtTime(.25,ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+dur);
+  g.connect(ac.destination);
+  playNote(freq,ac.currentTime,dur,ac,g,'triangle');
+}
+function renderSimon(el){
+  clearGameTimers();
+  let seq=[],inputIdx=0,accepting=false,level=0;
+  el.innerHTML=`<div id="game-simon">
+    <div class="shape-instruction">🐵 Watch the colors light up, then repeat them in order!</div>
+    <div class="game-score">Level: <b id="simon-level">0</b></div>
+    <div class="simon-grid">
+      ${SIMON_PADS.map((p,i)=>`<button class="simon-pad" data-i="${i}" style="background:${p.color}" disabled></button>`).join('')}
+    </div>
+    <button class="restart-btn" id="simon-start" style="background:var(--green);color:#fff">🐵 Start!</button>
+    <div class="game-feedback" id="simonfb"></div>
+  </div>`;
+  const pads=[...el.querySelectorAll('.simon-pad')];
+  const fb=()=>el.querySelector('#simonfb');
+  function flash(i,delay){
+    const t1=setTimeout(()=>{pads[i].classList.add('lit');playTone(SIMON_PADS[i].freq,0.35);},delay);
+    const t2=setTimeout(()=>pads[i].classList.remove('lit'),delay+380);
+    _gameTimers.push(t1,t2);
+  }
+  function playSeq(){
+    accepting=false;
+    pads.forEach(p=>p.disabled=true);
+    fb().textContent='👀 Watch…'; fb().className='game-feedback';
+    seq.forEach((s,i)=>flash(s,600*i+400));
+    const t=setTimeout(()=>{
+      accepting=true; inputIdx=0;
+      pads.forEach(p=>p.disabled=false);
+      fb().textContent='🐵 Your turn!';
+    },600*seq.length+500);
+    _gameTimers.push(t);
+  }
+  function nextRound(){
+    seq.push(Math.floor(Math.random()*4));
+    level=seq.length;
+    el.querySelector('#simon-level').textContent=level;
+    playSeq();
+  }
+  pads.forEach(p=>p.addEventListener('click',()=>{
+    if(!accepting) return;
+    const i=+p.dataset.i;
+    p.classList.add('lit'); playTone(SIMON_PADS[i].freq,0.3);
+    setTimeout(()=>p.classList.remove('lit'),250);
+    if(i===seq[inputIdx]){
+      inputIdx++;
+      if(inputIdx===seq.length){
+        accepting=false;
+        pads.forEach(x=>x.disabled=true);
+        fb().textContent='✅ Great!'; fb().className='game-feedback feedback-good';
+        playCorrect();
+        const t=setTimeout(nextRound,1100);
+        _gameTimers.push(t);
+      }
+    } else {
+      accepting=false;
+      pads.forEach(x=>x.disabled=true);
+      playWrong();
+      fb().textContent=`💫 Oops! You reached level ${level}. Try again!`;
+      fb().className='game-feedback feedback-bad';
+      el.querySelector('#simon-start').textContent='🔄 Play Again';
+      seq=[];
+    }
+  }));
+  el.querySelector('#simon-start').addEventListener('click',()=>{
+    clearGameTimers();
+    seq=[];
+    el.querySelector('#simon-start').textContent='🔄 Restart';
+    nextRound();
+  });
 }
 </script>
 </body>
